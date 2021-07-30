@@ -1,11 +1,13 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  MOVIES_PER_PAGE = 4
 
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    @page = params.fetch(:page, 0).to_i
+    @movies = Movie.offset(@page * MOVIES_PER_PAGE).limit(MOVIES_PER_PAGE)
   end
 
   # GET /movies/1 or /movies/1.json
