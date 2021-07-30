@@ -11,7 +11,10 @@
     <div class="col-sm-6 col-md-3">
       <div class="thumbnail">
         <%= link_to (image_tag movie.image, class: 'image'), movie %>
-        <h4><%= link_to movie.title, movie_path(:id => movie.id), class: "movie-show-link" %></h4>
+        <h4><%= link_to movie.title, movie_path(:id => movie.id), class: "movie-show-link" %></h4>      
+        <div class="field">
+          <div id="star-rating"></div>
+        </div>
       </div>
     </div>
   <% end %>
@@ -21,3 +24,10 @@
   |
   <%= link_to "Next Page", movies_path(page:@page+1) %>
 </div>
+
+<script>
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+</script>
