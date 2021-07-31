@@ -3,17 +3,13 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   MOVIES_PER_PAGE = 4
 
-
-  # GET /movies or /movies.json
   def index
     @page = params.fetch(:page, 0).to_i
     @movies = Movie.offset(@page * MOVIES_PER_PAGE).limit(MOVIES_PER_PAGE)
   end
 
-  # GET /movies/1 or /movies/1.json
   def show
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
-
     if @reviews.blank?
       @avg_review = 0
     else
@@ -21,19 +17,15 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/new
   def new
     @movie = current_user.movies.build
   end
 
-  # GET /movies/1/edit
   def edit
   end
 
-  # POST /movies or /movies.json
   def create
     @movie = current_user.movies.build(movie_params)
-
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: "Movie was successfully created." }
@@ -45,7 +37,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /movies/1 or /movies/1.json
   def update
     respond_to do |format|
       if @movie.update(movie_params)
@@ -58,7 +49,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # DELETE /movies/1 or /movies/1.json
   def destroy
     @movie.destroy
     respond_to do |format|
@@ -68,12 +58,10 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def movie_params
       params.require(:movie).permit(:title, :description, :category, :image)
     end

@@ -1,31 +1,14 @@
-/*!
- * jQuery Raty - A Star Rating Plugin
- *
- * The MIT License
- *
- * @author  : Washington Botelho
- * @doc     : http://wbotelhos.com/raty
- * @version : 2.7.0
- *
- */
-
-;
 (function($) {
   'use strict';
-
   var methods = {
     init: function(options) {
       return this.each(function() {
         this.self = $(this);
-
         methods.destroy.call(this.self);
-
         this.opt = $.extend(true, {}, $.fn.raty.defaults, options);
-
         methods._adjustCallback.call(this);
         methods._adjustNumber.call(this);
         methods._adjustHints.call(this);
-
         this.opt.score = methods._adjustedScore.call(this, this.opt.score);
 
         if (this.opt.starType !== 'img') {
@@ -52,7 +35,6 @@
           methods._lock.call(this);
         } else {
           this.style.cursor = 'pointer';
-
           methods._binds.call(this);
         }
       });
@@ -60,7 +42,6 @@
 
     _adjustCallback: function() {
       var options = ['number', 'readOnly', 'score', 'scoreName', 'target'];
-
       for (var i = 0; i < options.length; i++) {
         if (typeof this.opt[options[i]] === 'function') {
           this.opt[options[i]] = this.opt[options[i]].call(this);

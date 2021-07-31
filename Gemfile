@@ -22,13 +22,10 @@ gem 'will_paginate',              '3.3.0'
 gem 'bootstrap-will_paginate',    '1.0.0'
 gem 'bootstrap-sass',             '3.4.1'
 gem 'paperclip'
-gem 'rexml', '~> 3.2', '>= 3.2.4'
 gem 'world-flags'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
-
-
 
 group :development, :test do
   gem 'sqlite3', '1.4.2'
@@ -49,8 +46,7 @@ group :test do
   gem 'rails-controller-testing', '1.0.5'
   gem 'minitest',                 '5.11.3'
   gem 'minitest-reporters',       '1.3.8'
-  gem 'guard',                    '2.16.2'
-  gem 'guard-minitest',           '2.4.6'
+  gem 'rexml', '~> 3.2', '>= 3.2.4'
 end
 
 group :production do
