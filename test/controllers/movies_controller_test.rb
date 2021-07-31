@@ -1,48 +1,49 @@
-require "test_helper"
+require 'test_helper'
 
-class MoviesControllerTest < ActionDispatch::IntegrationTest
+class MoviesControllerTest < ActionController::TestCase
   setup do
     @movie = movies(:one)
   end
 
   test "should get index" do
-    get movies_url
+    get :index
     assert_response :success
+    assert_not_nil assigns(:movies)
   end
 
   test "should get new" do
-    get new_movie_url
+    get :new
     assert_response :success
   end
 
   test "should create movie" do
     assert_difference('Movie.count') do
-      post movies_url, params: { movie: { category: @movie.category, description: @movie.description, title: @movie.title } }
+      post :create, movie: { description: @movie.description, director: @movie.director, movie_length: @movie.movie_length, rating: @movie.rating, title: @movie.title }
     end
 
-    assert_redirected_to movie_url(Movie.last)
+    assert_redirected_to movie_path(assigns(:movie))
   end
 
   test "should show movie" do
-    get movie_url(@movie)
+    get :show, id: @movie
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_movie_url(@movie)
+    get :edit, id: @movie
     assert_response :success
   end
 
   test "should update movie" do
-    patch movie_url(@movie), params: { movie: { category: @movie.category, description: @movie.description, title: @movie.title } }
-    assert_redirected_to movie_url(@movie)
+    patch :update, id: @movie, movie: { description: @movie.description, director: @movie.director, movie_length: @movie.movie_length, rating: @movie.rating, title: @movie.title }
+    assert_redirected_to movie_path(assigns(:movie))
   end
 
   test "should destroy movie" do
     assert_difference('Movie.count', -1) do
-      delete movie_url(@movie)
+      delete :destroy, id: @movie
     end
 
-    assert_redirected_to movies_url
+    assert_redirected_to movies_path
   end
 end

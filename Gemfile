@@ -27,7 +27,6 @@ gem 'world-flags'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'searchkick', '~> 1.1', '>= 1.1.2'
 
 
 

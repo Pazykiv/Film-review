@@ -1,3 +1,4 @@
+<%= form_with(data: { controller: "ratystar" }) %>
 <% if !user_signed_in? %>
   <div class="jumbotron">
     <h1>Your Favorite Movies Reviewed</h1>
@@ -11,23 +12,14 @@
     <div class="col-sm-6 col-md-3">
       <div class="thumbnail">
         <%= link_to (image_tag movie.image, class: 'image'), movie %>
-        <h4><%= link_to movie.title, movie_path(:id => movie.id), class: "movie-show-link" %></h4>      
-        <div class="field">
-          <div id="star-rating"></div>
-        </div>
+        <h4><%= link_to movie.title, movie_path(:id => movie.id), class: "movie-show-link" %></h4>
+        <i id="star-rating"></i>
       </div>
     </div>
   <% end %>
 </div>
 <div class="pagination">
-  <%= link_to "Last Page", movies_path(page:@page-1) %>
+  <%= link_to "Last Page", movies_path(page:@page-1 && @page >= 0) %>
   |
   <%= link_to "Next Page", movies_path(page:@page+1) %>
 </div>
-
-<script>
-  $('#star-rating').raty({
-    path: '/assets/',
-    scoreName: 'review[rating]'
-  });
-</script>

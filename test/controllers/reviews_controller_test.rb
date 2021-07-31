@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ReviewsControllerTest < ActionDispatch::IntegrationTest
+class ReviewsControllerTest < ActionController::TestCase
   setup do
     @review = reviews(:one)
   end
